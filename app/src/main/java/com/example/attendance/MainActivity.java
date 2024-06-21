@@ -1,14 +1,21 @@
 package com.example.attendance;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,12 +32,17 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
 
     ArrayList<ClassItem> classItems = new ArrayList<>();
-
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         fab = findViewById(R.id.fab_main);
         fab.setOnClickListener(v -> showDialog());
@@ -41,39 +53,42 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         classAdapter = new ClassAdapter(this, classItems);
         recyclerView.setAdapter(classAdapter);
+        classAdapter.setOnItemClickListener(position -> gotoItemActiviy(position));
+
+        setToolBar();
+
+
+    }
+
+    private void setToolBar() {
+        toolbar = findViewById(R.id.toolbar);
+        TextView title = toolbar.findViewById(R.id.title_toolbar);
+        TextView subtitle = toolbar.findViewById(R.id.subtitle_toolbar);
+        ImageButton back = toolbar.findViewById(R.id.back);
+        ImageButton save = toolbar.findViewById(R.id.save);
+
+
+        title.setText("Attendace App");
+        subtitle.setVisibility(View.GONE);
+        back.setVisibility(View.INVISIBLE);;
+        save.setVisibility(View.INVISIBLE);
+    }
+
+    private void gotoItemActiviy(int position) { //this Method makes the class cliclable and redirect it to the StudentActivity.
+        Intent intent = new Intent(this, StudentActivity.class);
+        intent.putExtra("className", classItems.get(position).getClassName());
+        intent.putExtra("subjectName", classItems.get(position).getSubjectName());
+        intent.putExtra("position", position);
+        startActivity(intent);
     }
 
     private void showDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.class_dialog, null);
-        builder.setView(view);
-
-        final AlertDialog dialog = builder.create();
-        dialog.show();
-
-        EditText class_edt = view.findViewById(R.id.class_edt);  // Correct view reference
-        EditText subject_edt = view.findViewById(R.id.subject_edt);  // Correct view reference
-
-        Button cancel = view.findViewById(R.id.cancel_btn);
-        Button add = view.findViewById(R.id.add_btn);
-
-        cancel.setOnClickListener(v -> dialog.dismiss());
-        add.setOnClickListener(v -> {
-            addClass(class_edt, subject_edt);
-            dialog.dismiss();
-        });
+        MyDialog dialog = new MyDialog();
+        dialog.show(getSupportFragmentManager(), MyDialog.CLASS_ADD_DIALOG);
+        dialog.setListener((className, subjectName)-> addClass(className, subjectName));
     }
 
-    private void addClass(EditText class_edt, EditText subject_edt) {
-        String className = class_edt.getText().toString().trim();
-        String subjectName = subject_edt.getText().toString().trim();
-
-        if (className.isEmpty() || subjectName.isEmpty()) {
-            // Optionally, show a Toast message to inform the user
-            // Toast.makeText(this, "Please enter both class and subject names", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
+    private void addClass(String className, String subjectName) {
         classItems.add(new ClassItem(className, subjectName));
         classAdapter.notifyDataSetChanged();
     }

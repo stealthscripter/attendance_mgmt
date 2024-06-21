@@ -1,8 +1,8 @@
 package com.example.attendance;
 
 public class ClassItem {
-    String className;
-    String subjectName;
+    private String className;
+    private String subjectName;
 
     public void setClassName(String className) {
         this.className = className;

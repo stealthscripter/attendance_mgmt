@@ -2,15 +2,11 @@ package com.example.attendance;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
@@ -25,7 +21,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton fab;
+    FloatingActionButton floatingComponent;
     RecyclerView recyclerView;
 
     ClassAdapter classAdapter;
@@ -44,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        fab = findViewById(R.id.fab_main);
-        fab.setOnClickListener(v -> showDialog());
+        floatingComponent = findViewById(R.id.floating_main);
+        floatingComponent.setOnClickListener(v -> showDialog());
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);

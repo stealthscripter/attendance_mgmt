@@ -15,7 +15,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/student_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="#F1F1F1"
+
+        />
 
 
 </LinearLayout>

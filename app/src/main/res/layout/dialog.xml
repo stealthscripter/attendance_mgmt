@@ -12,9 +12,10 @@
 
 </LinearLayout>
     <TextView
+        android:id="@+id/titleDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add new class"
+        android:text="Title"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal"
@@ -26,17 +27,17 @@
         android:background="@color/black"
         />
     <EditText
-        android:id="@+id/class_edt"
+        android:id="@+id/est01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Class Name"
+        android:hint="edt01"
         android:layout_margin="8dp"
         />
     <EditText
-        android:id="@+id/subject_edt"
+        android:id="@+id/edt02"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Subject Name"
+        android:hint="edt02"
         android:layout_margin="8dp"
         />
 

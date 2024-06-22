@@ -75,7 +75,13 @@ public class StudentActivity extends AppCompatActivity {
         title.setText(className);
         subtitle.setText(subjectName);
 
-        back.setOnClickListener(v->onBackPressed());
+//        back.setOnClickListener(v->onBackPressed());
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         toolbar.inflateMenu(R.menu.student_menu);
         toolbar.setOnMenuItemClickListener(menuItem->onMenuItemClick(menuItem));
     }

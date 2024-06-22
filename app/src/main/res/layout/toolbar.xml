@@ -57,8 +57,8 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
-                <!--nat eszi gar save icon alseraleghen seraw vid part05 min 5:45-->
+                android:layout_centerVertical="true"
+                android:src="@drawable/save_icon"/>
 
         </RelativeLayout>
 

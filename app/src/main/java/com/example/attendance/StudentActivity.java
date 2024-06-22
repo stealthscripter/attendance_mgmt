@@ -72,6 +72,18 @@ public class StudentActivity extends AppCompatActivity {
         ImageButton back = toolbar.findViewById(R.id.back);
         ImageButton save = toolbar.findViewById(R.id.save);
 
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDatabaseHelper dbHelper = new MyDatabaseHelper(StudentActivity.this);
+                for (StudentItem studentItem : studentItems) {
+                    dbHelper.addAttendanceData(studentItem.getRoll(), studentItem.getName(), studentItem.getStatus());
+                }
+            }
+        });
+
+
+
         title.setText(className);
         subtitle.setText(subjectName);
 
@@ -89,7 +101,6 @@ public class StudentActivity extends AppCompatActivity {
     private boolean onMenuItemClick(MenuItem menuItem) {
         if(menuItem.getItemId() == R.id.add_student){
             showAddStudentDialog();
-
         }
         return true;
     }

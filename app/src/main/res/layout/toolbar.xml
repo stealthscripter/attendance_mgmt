@@ -55,13 +55,13 @@
                 android:id="@+id/save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:background="@android:color/transparent" />
                 <!--nat eszi gar save icon alseraleghen seraw vid part05 min 5:45-->
 
-        </RelativeLayout>
 
+        </RelativeLayout>
 
 
 

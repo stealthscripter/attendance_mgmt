@@ -14,6 +14,18 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="16dp">
 
+
+            <ImageButton
+                android:id="@+id/view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="60dp"
+
+                android:src="@drawable/baseline_adjust_24"
+
+                />
+
             <ImageButton
                 android:id="@+id/back"
                 android:layout_width="wrap_content"
@@ -53,16 +65,12 @@
 
             <ImageButton
                 android:id="@+id/save"
+                android:src="@drawable/baseline_add_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-<<<<<<< HEAD
                 android:background="@android:color/transparent" />
-                <!--nat eszi gar save icon alseraleghen seraw vid part05 min 5:45-->
-=======
-                android:src="@drawable/save_icon"/>
->>>>>>> ac42a84d2f3b20a95e8058f90be69ff9642fa8ec
 
 
         </RelativeLayout>

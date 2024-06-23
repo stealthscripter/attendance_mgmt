@@ -2,6 +2,7 @@ package com.example.attendance;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -39,8 +40,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
         onCreate(db);
-
     }
+
+
     void addAttendanceData(String studId, String studName, String attendanceState){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -57,4 +59,22 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
 
     }
+
+    public String getAllDataAsString() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        StringBuilder dataBuilder = new StringBuilder();
+        if (cursor.getCount() == 0) {
+            dataBuilder.append("No data found");
+        } else {
+            while (cursor.moveToNext()) {
+                dataBuilder.append("ID: ").append(cursor.getInt(0))
+                        .append(", Name: ").append(cursor.getString(1)).append("\n")
+                        .append(", Status: ").append(cursor.getString(2)).append("\n");
+            }
+        }
+        cursor.close();
+        return dataBuilder.toString();
+    }
 }
+

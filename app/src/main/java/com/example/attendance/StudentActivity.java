@@ -71,6 +71,18 @@ public class StudentActivity extends AppCompatActivity {
         TextView subtitle = toolbar.findViewById(R.id.subtitle_toolbar);
         ImageButton back = toolbar.findViewById(R.id.back);
         ImageButton save = toolbar.findViewById(R.id.save);
+        ImageButton view = toolbar.findViewById(R.id.view);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyDatabaseHelper dbHelper = new MyDatabaseHelper(StudentActivity.this);
+                Intent intent = new Intent(StudentActivity.this, DataViewer.class);
+                String data = dbHelper.getAllDataAsString();
+                intent.putExtra("Data", data);
+                startActivity(intent);
+            }
+        });
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +91,7 @@ public class StudentActivity extends AppCompatActivity {
                 for (StudentItem studentItem : studentItems) {
                     dbHelper.addAttendanceData(studentItem.getRoll(), studentItem.getName(), studentItem.getStatus());
                 }
+
             }
         });
 
